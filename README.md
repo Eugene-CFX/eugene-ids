@@ -1,6 +1,3 @@
-<img width="829" height="32" alt="second" src="https://github.com/user-attachments/assets/e84362fc-0b61-4bf1-a0fc-44bbd2be51c7" />
-
-
 # eugene-ids
 
 Shows names and server IDs above nearby players.
