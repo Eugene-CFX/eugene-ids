@@ -1,5 +1,7 @@
 # eugene-ids
 
+<img width="829" height="32" alt="second" src="https://github.com/user-attachments/assets/baae7751-4407-46af-9bd0-c9d1803bab65" />
+
 Shows names and server IDs above nearby players.
 
 Looks like: `Username [148]`
