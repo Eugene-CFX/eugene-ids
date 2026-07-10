@@ -6,7 +6,7 @@ Shows names and server IDs above nearby players.
 
 Looks like: `Username [148]`
 
-Uses native gamer tags. No NUI, no ESX/QBCore stuff.
+Uses native gamer tags. Standalone
 
 Resmon sits at 0.00–0.01 ms (flashes between the two) — highly optimized.
 
