@@ -3,12 +3,17 @@ Display = {}
 local commandOn = false
 local keyHeld = false
 
+---@return boolean
 function Display.active()
     return commandOn or keyHeld
 end
 
-function Display.setKey(on)
-    keyHeld = on
+function Display.holdKey()
+    keyHeld = true
+end
+
+function Display.releaseKey()
+    keyHeld = false
 end
 
 function Display.reset()
@@ -16,7 +21,7 @@ function Display.reset()
     keyHeld = false
 end
 
-function Display.toggle(notify)
+function Display.toggle()
     commandOn = not commandOn
 
     if commandOn then
@@ -24,8 +29,6 @@ function Display.toggle(notify)
     elseif Tags.hasAny() then
         Tags.clear()
     end
-
-    if not notify then return end
 
     lib.notify({
         title = 'Player IDs',

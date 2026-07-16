@@ -26,21 +26,21 @@ lib.addKeybind({
     defaultKey = Config.keybind,
     onPressed = function()
         if hold then
-            Display.setKey(true)
+            Display.holdKey()
             Tags.refresh()
             return
         end
-        Display.toggle(true)
+        Display.toggle()
     end,
     onReleased = function()
         if not hold then return end
-        Display.setKey(false)
+        Display.releaseKey()
         if not Display.active() and Tags.hasAny() then Tags.clear() end
     end,
 })
 
 RegisterCommand(Config.command, function()
-    Display.toggle(true)
+    Display.toggle()
 end, false)
 
 TriggerEvent('chat:addSuggestion', '/' .. Config.command, 'toggle ids')
