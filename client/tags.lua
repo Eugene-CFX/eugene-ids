@@ -1,8 +1,20 @@
 Tags = {}
 
+---@enum GamerTagComponent
 local comp = { name = 0, audio = 4 }
+
+---@class TagRow
+---@field tag integer
+---@field ped integer
+---@field label string
+---@field visible? boolean
+---@field talking? boolean
+
+---@type table<integer, TagRow>
 local active = {}
 
+---@param player integer
+---@return string
 local function buildLabel(player)
     local name = GetPlayerName(player)
     if not name or name == '' then name = 'Unknown' end
@@ -10,16 +22,21 @@ local function buildLabel(player)
     return ('%s [%d]'):format(name, GetPlayerServerId(player))
 end
 
+---@param player integer
+---@return boolean
 local function isTalking(player)
-    if player == cache.playerId then return false end
+    if player == cache.playerId or not MumbleIsConnected() then return false end
     return NetworkIsPlayerTalking(player)
 end
 
+---@param ped integer
+---@return boolean
 local function hasLos(ped)
     if Config.showThroughWalls then return true end
     return cache.ped and cache.ped ~= 0 and HasEntityClearLosToEntity(cache.ped, ped, 1)
 end
 
+---@param serverId integer
 local function remove(serverId)
     local row = active[serverId]
     if not row then return end
@@ -27,6 +44,9 @@ local function remove(serverId)
     active[serverId] = nil
 end
 
+---@param row TagRow
+---@param player integer
+---@param visible boolean
 local function drawTag(row, player, visible)
     local talk = visible and isTalking(player)
     if row.visible == visible and row.talking == talk then return end
@@ -47,6 +67,10 @@ local function drawTag(row, player, visible)
     SetMpGamerTagColour(row.tag, comp.name, talk and Config.talkingHudColour or 0)
 end
 
+---@param serverId integer
+---@param player integer
+---@param ped integer
+---@return TagRow
 local function getTag(serverId, player, ped)
     local text = buildLabel(player)
     local row = active[serverId]
@@ -64,6 +88,7 @@ local function getTag(serverId, player, ped)
     return row
 end
 
+---@return boolean
 function Tags.hasAny()
     return next(active) ~= nil
 end
@@ -73,9 +98,7 @@ function Tags.clear()
 end
 
 function Tags.refresh()
-    if not MumbleIsConnected() then return end
-
-    local origin = cache.coords or GetEntityCoords(cache.ped)
+    local origin = GetEntityCoords(cache.ped)
     local maxDist = Config.distance
     local seen = {}
 

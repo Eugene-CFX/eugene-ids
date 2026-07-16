@@ -1,22 +1,21 @@
+---@alias DisplayMode 'toggle' | 'hold'
+
+---@class Config
+---@field distance number # range in meters
+---@field keybind string # default key, rebindable in the FiveM key bindings menu
+---@field command string # chat command that toggles the display
+---@field displayMode DisplayMode # toggle with one press, or show only while held
+---@field showThroughWalls boolean # show tags through walls
+---@field refreshInterval integer # milliseconds between ID refreshes
+---@field talkingHudColour integer # hud color index shown while a player talks
 Config = {
-    -- range in meters
     distance = 25.0,
-    
     keybind = 'HOME',
-
     command = 'ids',
-
-    -- hold or toggle
     displayMode = 'toggle',
-
-    -- self explanatory 
     showThroughWalls = false,
-
-    -- ms between updates
     refreshInterval = 250,
-
-    -- color while talking, list: https://docs.fivem.net/docs/game-references/hud-colors/
-    talkingHudColour = 18,
+    talkingHudColour = 18
 }
 
 -- geeg
