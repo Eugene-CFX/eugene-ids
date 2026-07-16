@@ -4,9 +4,8 @@ lua54 'yes'
 
 name 'eugene-ids'
 author 'eugene'
-description 'player ids | Please do not try to sell this lol | Geeg'
-
-dependencies {'pma-voice'}
+version '1.0.1'
+description 'player ids | Please do not try to sell this lol'
 
 shared_scripts {
     '@ox_lib/init.lua',
